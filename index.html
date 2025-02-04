@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>firebase</title>
+    <link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="title-text">
+        <div class="title login">Login Form</div>
+        <div class="title signup">Signup Form</div>
+      </div>
+      <div class="form-container">
+        <div class="slide-controls">
+          <input type="radio" name="slide" id="login" checked />
+          <input type="radio" name="slide" id="signup" />
+          <label for="login" class="slide login">Login</label>
+          <label for="signup" class="slide signup">Signup</label>
+          <div class="slider-tab"></div>
+        </div>
+        <div class="form-inner">
+          <form id="signInForm" class="login">
+            <div class="field">
+              <input type="email" id="loginUserEmail" placeholder="Email Address" required />
+              <span id="loginEmailError" class="error">Invalid Login Credentials</span>
+            </div>
+            <div class="field">
+              <input type="password" id="loginUserPass" placeholder="Password" required />
+              <span id="loginPassError" class="error">Invalid Login Credentials</span>
+            </div>
+            <div class="pass-link"><a href="#">Forgot password?</a></div>
+            <div class="field btn">
+              <div class="btn-layer"></div>
+              <input type="submit" value="Login" />
+            </div>
+            <div class="signup-link">
+              Not a member? <a href="">Signup now</a>
+            </div>
+          </form>
+          <form id="signUpForm" class="signup">
+            <div class="field">
+              <input type="text" id="userFullName" class="input" placeholder="Full Name" required />
+            </div>
+            <div class="field">
+              <input type="email" id="signupUserEmail" class="input" placeholder="Email Address" required />
+              <span id="signupEmailError" class="error"></span>
+            </div>
+            <div class="field">
+              <input type="password" id="signupUserPass" class="input" placeholder="Password" required />
+              <span id="signupPassError" class="error"></span>
+            </div>
+            <div class="field">
+              <input type="password" id="signupUserCPass" class="input" placeholder="Confirm password" required />
+              <span id="signupcPassError" class="error">Password Doesn't Match</span>
+            </div>
+            <div class="field btn">
+              <div class="btn-layer"></div>
+              <input type="submit" value="Signup" />
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="loading" id="loader">
+      <div class="loader"></div>
+    </div>
+  </body>
+  <script src="./JS/app.js" type="module"></script>
+  <script src="./JS/firebase.js" type="module"></script>
+</html>

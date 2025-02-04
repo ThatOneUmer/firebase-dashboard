@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="main">
+      <div class="nav-bar">
+        <h1>Dashboard</h1>
+        <button class="btn" id="signOut">Sign out</button>
+      </div>
+      <div class="userData-box">
+        <div class="user-box">
+        <h1>Your Data</h1>
+        <div class="user-data">
+          <span>Name : <strong id="ufname" class="col"></strong></span>
+          <span>Email : <strong id="uename" class="col tn"></strong></span>
+          <span>User ID : <strong id="uiname" class="col tn"></strong></span>
+        </div>
+      </div>
+      <div class="buttons">
+        <button class="btn" id="updateAcc">Update Info</button>
+        <button class="btn" id="deleteAcc">Delete Account</button>
+      </div>
+      </div>
+      <div class="addProducts">
+        <div class="crud">
+          <h1>CRUD</h1>
+          <button class="btn" id="showCreate">Create</button>
+        </div>
+        <div class="product" id="products"></div>
+      </div>
+    </div>
+    <div class="main-top" id="main-top">
+      <div class="top-box" id="hideOne">
+        <div class="top-head">
+          <button class="btn" id="cross">X</button>
+        </div>
+        <h1>Update your info</h1>
+        <div class="top-inp-fields">
+          <div class="inputs">
+            <label for="upd-fname">Name :</label>
+            <input
+              type="text"
+              id="upd-fname"
+              class="input-fields"
+              placeholder="Enter your update name"
+            />
+          </div>
+          <div class="inputs">
+            <label for="upd-lname">Email :</label>
+            <input
+              type="text"
+              id="upd-lname"
+              class="input-fields"
+              placeholder="Enter your update email"
+            />
+          </div>
+        </div>
+        <button class="btn" id="updatedData">Update</button>
+      </div>
+      <div class="top-box" id="showOne">
+        <div class="top-head">
+          <button class="btn" id="cross2">X</button>
+        </div>
+        <h1>Create</h1>
+        <div class="top-inp-fields">
+          <div class="inputs">
+            <label for="proName">Name :</label>
+            <input
+              type="text"
+              id="proName"
+              class="input-fields"
+              placeholder="Enter your product name"
+            />
+          </div>
+          <div class="inputs">
+            <label for="proCompany">Company :</label>
+            <input
+              type="text"
+              id="proCompany"
+              class="input-fields"
+              placeholder="Enter your comapny name"
+            />
+          </div>
+          <div class="inputs">
+            <label for="proQuantity">Quantity :</label>
+            <input
+              type="number"
+              id="proQuantity"
+              class="input-fields"
+              placeholder="product quantity"
+            />
+          </div>
+        </div>
+        <button class="btn" id="addProduct">Create</button>
+      </div>
+    </div>
+    <div class="loading" id="loader">
+      <div class="loader"></div>
+    </div>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
