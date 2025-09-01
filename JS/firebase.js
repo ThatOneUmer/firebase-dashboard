@@ -19,6 +19,10 @@ import {
   doc,
   setDoc,
   updateDoc,
+  query,
+  where,
+  limit,
+  orderBy,
 } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -51,5 +55,9 @@ export {
   setDoc,
   updateDoc,
   deleteUser,
+  query,
+  where,
+  limit,
+  orderBy,
   app,
 };

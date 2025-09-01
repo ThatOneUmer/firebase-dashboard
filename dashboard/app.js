@@ -13,6 +13,10 @@ import {
   addDoc,
   collection,
   getDocs,
+  query,
+  where,
+  limit,
+  orderBy,
 } from "../JS/firebase.js";
 
 const auth = getAuth(app);
@@ -31,9 +35,31 @@ let dataCatcher = async (uid) => {
     fullName.innerText = user.fullName;
     userMail.innerText = user.email;
     useridName.innerText = uid;
+
+    let fetchPosts = async () => {
+      let div = document.getElementById("myPost");
+      div.innerHTML = "";
+      const q = query(collection(db, "Posts"), where("productID", "==", uid));
+      let querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        let productData = doc.data();
+        let productDiv = document.createElement("div");
+        productDiv.innerHTML = `
+    <div class="proBox">
+    <h2>${user.fullName}</h2>
+    <h6></h6>
+  <p>${productData.productName}</p>
+  <button class="btn" onClick="deleteProduct(event, '${doc.id}')">Delete</button>
+</div>
+    `;
+        div.appendChild(productDiv);
+      });
+    };
+    fetchPosts();
   }
 };
 
+let currentUserID = [];
 let checkUser = async () => {
   try {
     onAuthStateChanged(auth, async (user) => {
@@ -130,20 +156,16 @@ document.getElementById("cross2").addEventListener("click", quitTop);
 
 let proMaker = async () => {
   let inpPname = document.getElementById("proName").value.trim();
-  let inpCName = document.getElementById("proCompany").value.trim();
-  let inpQuantity = document.getElementById("proQuantity").value.trim();
-
-  if (!inpPname || !inpCName || !inpQuantity) {
+  if (!inpPname) {
     alert("All fields are required!");
     return;
   }
   let loader = document.getElementById("loader");
   loader.style.display = "flex";
   try {
-    await addDoc(collection(db, "products"), {
+    await addDoc(collection(db, "Posts"), {
       productName: inpPname,
-      companyname: inpCName,
-      quantity: inpQuantity,
+      productID: userID,
     });
     loader.style.display = "none";
     quitTop();
@@ -157,31 +179,64 @@ document.getElementById("addProduct").addEventListener("click", proMaker);
 let fetchProducts = async () => {
   let div = document.getElementById("products");
   div.innerHTML = "";
-  let querySnapshot = await getDocs(collection(db, "products"));
-  querySnapshot.forEach((doc) => {
+
+  let querySnapshot = await getDocs(collection(db, "Posts"));
+
+  querySnapshot.forEach(async(doc) => {
     let productData = doc.data();
-    let productDiv = document.createElement("div");
+    const q = query(
+    collection(db, "users"),
+    where("uid", "==", productData.productID)
+    );
+    console.log(q)
+    let userSnapshot = await getDocs(q);
+    let productDiv = window.document.createElement("div");
     productDiv.innerHTML = `
-    <div class="proBox">
-  <p>${productData.productName}</p>
-  <p>${productData.companyname}</p>
-  <p>${productData.quantity}</p>
-  <button onclick="deleteProduct('${doc.id}')" class="btn">Delete</button>
-</div>
+      <div class="proBox">
+        <h4></h4>
+        <p>${productData.productName}</p>
+      </div>
     `;
     div.appendChild(productDiv);
   });
 };
 fetchProducts();
 
-window.deleteProduct = async (docID) => {
+window.deleteProduct = async (event, docID) => {
   let loader = document.getElementById("loader");
   loader.style.display = "flex";
   try {
-    await deleteDoc(doc(db, "products", docID));
+    await deleteDoc(doc(db, "Posts", docID));
+    event.target.parentElement.remove();
     loader.style.display = "none";
     fetchProducts();
   } catch (error) {
     console.error("Error deleting product:", error);
   }
 };
+
+let myDashboard = () => {
+  let allPosts = document.getElementById("allPosts");
+  let myPosts = document.getElementById("myPosts");
+  let myPostBtn = document.getElementById("myPostBtn");
+  myPostBtn.style.backgroundColor = "green";
+  let allPostBtn = document.getElementById("allPostBtn");
+  allPostBtn.style.backgroundColor = "#1999ff";
+  myPosts.style.display = "flex";
+  allPosts.style.display = "none";
+};
+let myPostBtn = document.getElementById("myPostBtn");
+myPostBtn.addEventListener("click", myDashboard);
+
+let alluserPosts = () => {
+  let allPosts = document.getElementById("allPosts");
+  let myPosts = document.getElementById("myPosts");
+  let allPostBtn = document.getElementById("allPostBtn");
+  allPostBtn.style.backgroundColor = "green";
+  let myPostBtn = document.getElementById("myPostBtn");
+  myPostBtn.style.backgroundColor = "#1999ff";
+  myPosts.style.display = "none";
+  allPosts.style.display = "flex";
+};
+let allPostBtn = document.getElementById("allPostBtn");
+allPostBtn.addEventListener("click", alluserPosts);

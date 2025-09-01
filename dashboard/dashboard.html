@@ -9,27 +9,38 @@
   <body>
     <div class="main">
       <div class="nav-bar">
-        <h1>Dashboard</h1>
+        <h1>myBook</h1>
+        <div class="two-btns">
+          <button class="btn" id="myPostBtn">Dashboard</button>
+          <button class="btn" id="allPostBtn">Newsfeed</button>
+        </div>
         <button class="btn" id="signOut">Sign out</button>
       </div>
-      <div class="userData-box">
+      <div class="userData-box" id="myPosts">
         <div class="user-box">
-        <h1>Your Data</h1>
-        <div class="user-data">
-          <span>Name : <strong id="ufname" class="col"></strong></span>
-          <span>Email : <strong id="uename" class="col tn"></strong></span>
-          <span>User ID : <strong id="uiname" class="col tn"></strong></span>
+          <h1></h1>
+          <div class="user-data">
+            <span>Name : <strong id="ufname" class="col"></strong></span>
+            <span>Email : <strong id="uename" class="col tn"></strong></span>
+            <span>User ID : <strong id="uiname" class="col tn"></strong></span>
+          </div>
+        </div>
+        <div class="buttons">
+          <button class="btn" id="updateAcc">Update Info</button>
+          <button class="btn" id="deleteAcc">Delete Account</button>
+        </div>
+        <div class="myPosts" id="ownPost">
+          <div class="crud">
+            <h1>My Posts</h1>
+            <button class="btn" id="showCreate">Create Post</button>
+          </div>
+          <div class="product" id="myPost"></div>
         </div>
       </div>
-      <div class="buttons">
-        <button class="btn" id="updateAcc">Update Info</button>
-        <button class="btn" id="deleteAcc">Delete Account</button>
-      </div>
-      </div>
-      <div class="addProducts">
+      <div class="addProducts" id="allPosts">
         <div class="crud">
-          <h1>CRUD</h1>
-          <button class="btn" id="showCreate">Create</button>
+          <h1>All Posts</h1>
+          <button class="btn" id="showCreate">Create Post</button>
         </div>
         <div class="product" id="products"></div>
       </div>
@@ -68,35 +79,17 @@
         </div>
         <h1>Create</h1>
         <div class="top-inp-fields">
-          <div class="inputs">
-            <label for="proName">Name :</label>
+          <div class="inputs post">
+            <label for="proName">Content :</label>
             <input
               type="text"
               id="proName"
-              class="input-fields"
-              placeholder="Enter your product name"
-            />
-          </div>
-          <div class="inputs">
-            <label for="proCompany">Company :</label>
-            <input
-              type="text"
-              id="proCompany"
-              class="input-fields"
-              placeholder="Enter your comapny name"
-            />
-          </div>
-          <div class="inputs">
-            <label for="proQuantity">Quantity :</label>
-            <input
-              type="number"
-              id="proQuantity"
-              class="input-fields"
-              placeholder="product quantity"
+              class="input-fields postInp"
+              placeholder="write your content here"
             />
           </div>
         </div>
-        <button class="btn" id="addProduct">Create</button>
+        <button class="btn" id="addProduct">Post</button>
       </div>
     </div>
     <div class="loading" id="loader">
